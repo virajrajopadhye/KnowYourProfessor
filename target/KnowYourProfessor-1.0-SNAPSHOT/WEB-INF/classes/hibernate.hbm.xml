@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright (c) 2008, 2016 Oracle and/or its affiliates. All rights reserved.
+
+Oracle and Java are registered trademarks of Oracle and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 2 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://www.netbeans.org/cddl-gplv2.html
+or nbbuild/licenses/CDDL-GPL-2-CP. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License file at
+nbbuild/licenses/CDDL-GPL-2-CP.  Oracle designates this
+particular file as subject to the "Classpath" exception as provided
+by Oracle in the GPL Version 2 section of the License file that
+accompanied this code. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 2, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 2] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 2 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 2 code and therefore, elected the GPL
+Version 2 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+-->
+<hibernate-mapping>
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.me.pojo.Department" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="department">
+        <id name="id" type="long">
+            <column name="departmentID"/>
+            <generator class="native"/>
+        </id>
+  
+        <property name="departmentName" type="java.lang.String">
+            <column name="departmentName"/>
+        </property>
+    </class>
+
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.me.pojo.Students" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="student">
+        <id name="id" type="long">
+            <column name="studentID"/>
+            <generator class="native"/>
+        </id>
+  
+        <property name="firstName" type="java.lang.String">
+            <column name="firstName"/>
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <column name="lastName"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email"/>
+        </property>
+        <property name="username" type="java.lang.String">
+            <column name="username"/>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password"/>
+        </property>
+        <property name="rate" type="boolean" >
+            <column name="rate" not-null="true" />
+        </property>
+    </class>
+
+
+
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.me.pojo.Professor" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="professor">
+        <id name="id" type="long">
+            <column name="professorID"/>
+            <generator class="native"/>
+        </id>
+  
+        <property name="department" type="java.lang.String">
+            <column name="department"/>
+        </property>
+        <property name="firstName" type="java.lang.String">
+            <column name="firstName"/>
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <column name="lastName"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email"/>
+        </property>
+        
+        <property name="imagepath" type="java.lang.String">
+            <column name="imagepath"/>
+        </property>
+        
+        <list name="subjects" table="subjects" lazy="false">
+            <key column="professor_ID"/>
+            <list-index column="position"></list-index>
+    
+            <element type="java.lang.String" column="course_name" not-null="true"/>
+    
+        </list>
+ 
+    </class>
+    
+    
+    
+    
+    
+    
+     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.me.pojo.Rating" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="rating">
+        <id name="rating_id" type="long">
+            <column name="ratingID"/>
+            <generator class="native"/>
+        </id>
+  
+        <property name="professor_id" type="java.lang.Long">
+            <column name="professor_id"/>
+        </property>
+         <property name="professor_fName" type="java.lang.String">
+            <column name="professor_fName"/>
+        </property>
+         <property name="professor_LName" type="java.lang.String">
+            <column name="professor_LName"/>
+        </property>
+        
+        
+        
+        
+        <property name="student_id" type="java.lang.Long">
+            <column name="student_id"/>
+        </property>
+        
+         <property name="overall_rating" type="java.lang.Integer">
+            <column name="overall_rating"/>
+        </property>
+        <property name="subject" type="java.lang.String">
+            <column name="subject"/>
+        </property>
+       
+        <property name="difficulty" type="java.lang.Integer">
+            <column name="difficulty"/>
+        </property>
+        <property name="recommend" type="java.lang.Integer">
+            <column name="recommend"/>
+        </property>
+        
+        <property name="attendance" type="java.lang.Integer">
+            <column name="attendance"/>
+        </property>
+         <property name="industry_use" type="java.lang.Integer">
+            <column name="industry_use"/>
+        </property>
+        <property name="comment" type="java.lang.String">
+            <column name="comment"/>
+        </property>
+      
+    </class>
+
+
+
+
+
+</hibernate-mapping>
